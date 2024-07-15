@@ -12,8 +12,8 @@ public static class ServiceExtensions
     public static void ConfigurePersistenceApp(this IServiceCollection services,
                                                 IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Sqlite");
-        services.AddDbContext<AppDbContext>(opt => opt.UseSqlite(connectionString));
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(connectionString));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
